@@ -26,6 +26,14 @@ function preload() {
 }
 
 function create() {
+    var star_width = 25;
+    var star_height = 20;
+    for (i=0; i < 100; i++) {
+        x = (i * star_width) % 800;
+        y = parseInt((i * star_width) / 800) * star_height;
+        console.log("(x, y) = (", x, y, ")")
+        game.add.sprite(x, y, 'star');
+    }
 }
 
 function update() {
