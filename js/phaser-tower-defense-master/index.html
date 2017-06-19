@@ -19,49 +19,36 @@
 
     </body>
     <script type="text/javascript">
-        var bulletTime = 0;
+    
+        // Time management
+        var startTime, checkTime;
+        var d = new Date();
+        startTime = d.getTime();
+        
+       
+        // Initialize Game 
         var gameOpts = {
             preload: preload,
             create: create,
             update: update,
             render: render
         };
+        
         var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'gameContainer', gameOpts);
+        
+        
         var tileSquare = 32;
         var map, layer;
-        var tileForbiden = [
-            "9", "10", "111", "112", "211", "212", "311", "312", "411", "412",
-            "511", "512", "510", "59", "58", "68", "78", "88", "98", "108", "118",
-            "128", "138", "139", "1310", "1311", "1312", "1313", "1314", "1315",
-            "1316", "1416", "1516", "1616", "1716", "1816", "1916", "2016",
-            "2116", "2115", "2114", "2113", "2213", "2313", "2413", "2513"
-        ];
-        var path = [
-            {x: 0, y: 12}, {x: 1, y: 12}, {x: 2, y: 12}, {x: 3, y: 12},
-            {x: 4, y: 12}, {x: 5, y: 12}
-           /** 
-            {x: 5, y: 11}, {x: 5, y: 10},
-            {x: 5, y: 9}, {x: 5, y: 8}, {x: 6, y: 8}, {x: 7, y: 8},
-            {x: 8, y: 8}, {x: 9, y: 8}, {x: 10, y: 8}, {x: 11, y: 8},
-            {x: 12, y: 8}, {x: 13, y: 8}, {x: 13, y: 9}, {x: 13, y: 10},
-            {x: 13, y: 11}, {x: 13, y: 12}, {x: 13, y: 13}, {x: 13, y: 14},
-            {x: 13, y: 15}, {x: 13, y: 16}, {x: 14, y: 16}, {x: 15, y: 16},
-            {x: 16, y: 16}, {x: 17, y: 16}, {x: 18, y: 16}, {x: 19, y: 16},
-            {x: 20, y: 16}, {x: 21, y: 16}, {x: 21, y: 15}, {x: 21, y: 14},
-            {x: 21, y: 13}, {x: 22, y: 13}, {x: 23, y: 13}, {x: 24, y: 13},
-            {x: 25, y: 13}
-            /**/
-        ];
+        var tileForbiden = [];
+        var towers;
+        
+        
         var enemysAnimation = [
             {'name': 'duck', 'length': 8},
             {'name': 'panda', 'length': 3},
             {'name': 'dog', 'length': 6},
             {'name': 'penguin', 'length': 4}
         ];
-        var car, car2, duck;
-        var towers;
-        var canAddTower = true;
-        var bulletsTowers, explosions, cursors, fireButton;
         
         function preload() {
             game.load.tilemap('desert', 'assets/maps/tower-defense.json', null, Phaser.Tilemap.TILED_JSON);
@@ -129,19 +116,21 @@
             var t = game.add.text(700, 40, text, style);
             t.tint = "#000";
             t.inputEnabled = true;
-//            t.events.onInputDown.add(Tower.prototype.add(), this);
+            t.events.onInputDown.add(Tower.prototype.add(), this);
 
         }
         function render() {
 
         }
         function update() {
-            /*
-             * Generate Enemy
-             */
-            enemys.forEach(function(enemy) {
-                Enemy.prototype.moveElmt(enemy);
-            });
+            d = new Date();
+            checkTime = d.getTime();
+            if (checkTime - startTime > 1000) {
+                // ASSERT: it's been a second.
+                moveEnemies();
+                startTime = checkTime;
+            }
+            
             /*
              * Tower fire
              */
@@ -152,12 +141,7 @@
             game.physics.arcade.overlap(bullets, enemys, collisionHandler, null, this);
         }
         function listener(pointer) {
-            if (canAddTower) {
-                /*
-                 * Add tower
-                 */
-                Tower.prototype.add(pointer);
-            }
+            Tower.prototype.add(pointer);
         }
         function collisionHandler(bullet, enemy) {
             bullet.kill();
@@ -171,13 +155,19 @@
                 if (i < 5) {
                     console.log("i: ", i);
                     var animEnemy = enemysAnimation[parseInt(Math.random() * enemysAnimation.length)];
-                    new Enemy(path[0].x * tileSquare, path[0].y * tileSquare, animEnemy.name, animEnemy.length);
+                    new Enemy(tileSquare, tileSquare, animEnemy.name, animEnemy.length);
                 } else {
                     console.log("Clearing timed enemy loop");
                     clearTimeout(enemysBcl);
                 }
                 i++;
             }, 1000);
+        }
+        
+        function moveEnemies() {
+            enemys.forEach(function(enemy) {
+                Enemy.prototype.moveElmt(enemy);
+            });
         }
 
     </script>
