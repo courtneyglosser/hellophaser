@@ -19,13 +19,13 @@
 
     </body>
     <script type="text/javascript">
-    
+ 
         // Time management
         var startTime, checkTime;
         var d = new Date();
         startTime = d.getTime();
-        
-       
+
+
         // Initialize Game 
         var gameOpts = {
             preload: preload,
@@ -33,23 +33,23 @@
             update: update,
             render: render
         };
-        
+ 
         var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'gameContainer', gameOpts);
-        
-        
+ 
+ 
         var tileSquare = 32;
         var map, layer;
         var tileForbiden = [];
         var towers;
-        
-        
+ 
+ 
         var enemysAnimation = [
             {'name': 'duck', 'length': 8},
             {'name': 'panda', 'length': 3},
             {'name': 'dog', 'length': 6},
             {'name': 'penguin', 'length': 4}
         ];
-        
+ 
         function preload() {
             game.load.tilemap('desert', 'assets/maps/tower-defense.json', null, Phaser.Tilemap.TILED_JSON);
             game.load.image('tiles', 'assets/maps/tmw_desert_spacing.png');
@@ -130,7 +130,7 @@
                 moveEnemies();
                 startTime = checkTime;
             }
-            
+ 
             /*
              * Tower fire
              */
@@ -163,7 +163,7 @@
                 i++;
             }, 1000);
         }
-        
+ 
         function moveEnemies() {
             enemys.forEach(function(enemy) {
                 Enemy.prototype.moveElmt(enemy);
