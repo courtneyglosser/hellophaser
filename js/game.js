@@ -14,7 +14,6 @@ define(function (require) {
     console.log(test.helloworld());
     
     console.log("Tower: ", tower.helloworld());
-    console.log("Enemy: ", enemy.helloworld());
     console.log("Time: ", time.helloworld());
     
     var startTime = time.getTime();
@@ -34,22 +33,24 @@ define(function (require) {
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameOpts);
     
     var map, layer;
+    
+    var creeps = [];
 
     function preload () {
-        console.log("Preloading");
 
         game.load.image('logo', '/phaser.png');
         game.load.image('entrance', 'assets/entrance-1.png');
         game.load.image('exit', 'assets/exit-1.png');
         
+        game.load.image('creep', 'assets/creep-1.png');
+        game.load.image('tower', 'assets/tower-1.png');
         
         game.load.tilemap('desert', 'assets/maps/tilemap-1.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/maps/tower-tilemap-1.png');
-
+        
     }
 
     function create () {
-        console.log("Creating!");
 
         var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
         logo.anchor.setTo(0.5, 0.5);
@@ -60,13 +61,30 @@ define(function (require) {
         layer = map.createLayer('Ground');
         layer.resizeWorld();
         
-        var entrance = game.add.sprite(0, game.world.centerY, 'entrance');
+        var entranceX = 0;
+        var entranceY = game.world.centerY;
+        
+        var entrance = game.add.sprite(entranceX, entranceY, 'entrance');
         entrance.anchor.setTo(0, 0);
         var exit = game.add.sprite(game.world.width - tileWidth, game.world.centerY, 'exit');
         exit.anchor.setTo(0, 0);
+        for (i=0; i < 20; i++){
+            var creepImage = game.add.sprite(entranceX, entranceY, 'creep');
+            creepImage.anchor.setTo(0, 0);
+            creeps.push(enemy.create(creepImage));
+        }
+
     }
     
-    function update() {}
+    function update() {
+        var checkTime = time.tickTime(startTime);
+        if (checkTime) {
+            console.log("Tick");
+            startTime = checkTime;
+            
+            // Move Creeps
+        }
+    }
     function render() {}
     
 });
