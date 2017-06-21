@@ -1,15 +1,12 @@
-define(function (require) {
+define(
+    function (require) {
     // Load any app-specific modules
     // with a relative require call,
     // like:
     var test = require('./test');
-    var enemy = require('./enemy');
     var tower = require('./tower');
     var time = require('./time');
-
-    // Load library/vendor modules using
-    // full IDs, like:
-//    var print = require('print');
+    var Enemy = require('./enemy');
 
     console.log(test.helloworld());
     
@@ -31,10 +28,12 @@ define(function (require) {
     };
  
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameOpts);
+   
     
     var map, layer;
-    
     var creeps = [];
+    var numCreeps = 20;
+    var countCreeps = 0; // How many have started their move?
 
     function preload () {
 
@@ -68,23 +67,41 @@ define(function (require) {
         entrance.anchor.setTo(0, 0);
         var exit = game.add.sprite(game.world.width - tileWidth, game.world.centerY, 'exit');
         exit.anchor.setTo(0, 0);
-        for (i=0; i < 20; i++){
+        for (i=0; i < numCreeps; i++){
             var creepImage = game.add.sprite(entranceX, entranceY, 'creep');
             creepImage.anchor.setTo(0, 0);
-            creeps.push(enemy.create(creepImage));
+            creeps.push(new Enemy(creepImage)); //enemy.create(creepImage));
         }
-
     }
-    
+   
     function update() {
         var checkTime = time.tickTime(startTime);
         if (checkTime) {
-            console.log("Tick");
             startTime = checkTime;
-            
-            // Move Creeps
+            checkTime = false;
+            moveCreeps();
         }
     }
     function render() {}
+    
+    function moveCreeps() {
+        
+        if (countCreeps < numCreeps) { 
+            var currentTime = time.getTime();
+            var levelStartTime = time.getLevelStartTime();
+            var monsterTick = time.monsterTicker(numCreeps);
+            var releasedMonstersTime = monsterTick * countCreeps;
+            var diff = currentTime - (levelStartTime + releasedMonstersTime);
+           
+            if (diff > monsterTick) {
+                countCreeps++;
+            }
+        }
+       
+        console.log("Count to move: ", countCreeps); 
+        for (var i=0; i < countCreeps; i++) {
+            creeps[i].move(tileWidth);
+        }
+    }
     
 });

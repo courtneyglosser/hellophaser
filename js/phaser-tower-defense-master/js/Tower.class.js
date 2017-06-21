@@ -12,7 +12,7 @@ var Tower = function(worldX, worldY, tileX, tileY, tile) {
         this.tower.fireTime = 2000;
         this.tower.fireLastTime = game.time.now + this.tower.fireTime;
         towers.add(this.tower);
-    tileForbiden.push(index);
+        tileForbiden.push(index);
     }
     else {
         console.log("Failed forbidden tile check", index);

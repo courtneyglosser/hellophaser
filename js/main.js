@@ -9,6 +9,7 @@
 requirejs.config({
     baseUrl: 'js',
     paths: {
+        "Enemy" : "enemy"
     }
 });
 
