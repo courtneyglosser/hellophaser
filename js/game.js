@@ -62,16 +62,19 @@ define(
         
         var entranceX = 0;
         var entranceY = game.world.centerY;
+        var exitX = game.world.width - tileWidth;
+        var exitY = game.world.centerY;
         
         var entrance = game.add.sprite(entranceX, entranceY, 'entrance');
         entrance.anchor.setTo(0, 0);
-        var exit = game.add.sprite(game.world.width - tileWidth, game.world.centerY, 'exit');
+        var exit = game.add.sprite(exitX, exitY, 'exit');
         exit.anchor.setTo(0, 0);
         for (i=0; i < numCreeps; i++){
             var creepImage = game.add.sprite(entranceX, entranceY, 'creep');
             creepImage.anchor.setTo(0, 0);
             creeps.push(new Enemy(creepImage)); //enemy.create(creepImage));
         }
+
     }
    
     function update() {
@@ -81,6 +84,10 @@ define(
             checkTime = false;
             moveCreeps();
         }
+
+        var exitX = game.world.width - tileWidth;
+        var exitY = game.world.centerY;
+        checkCreeps(exitX, exitY);
     }
     function render() {}
     
@@ -98,9 +105,14 @@ define(
             }
         }
        
-        console.log("Count to move: ", countCreeps); 
         for (var i=0; i < countCreeps; i++) {
             creeps[i].move(tileWidth);
+        }
+    }
+
+    function checkCreeps(x, y) {
+        for (var i=0; i < countCreeps; i++) {
+            creeps[i].checkExit(x, y);
         }
     }
     

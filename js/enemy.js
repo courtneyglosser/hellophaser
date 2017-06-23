@@ -9,32 +9,36 @@ define('enemy', function() {
         this.speed = 1;
         
         // Now add methods
-        this.create = function(eSprite) {
-            this.eSprite = eSprite;
-            this.hasMoved = false;
-        }
-        
-        this.hasMoved = function() {
-            return this.hasMoved;
-        };
-        
-        this.setMoved = function(moved) {
-            this.hasMoved = moved;
-        };
-    
-        this.move = function (distance) {
-            console.log("Moving!");
-            this.eSprite.x += distance * this.speed;
-        }
-        
-        this.setCount = function(count) {
-            this.count = count;
-        }
-        this.getCount = function () {
-            return this.count;
+    }
+
+    Enemy.prototype.create = function(eSprite) {
+        this.eSprite = eSprite;
+        this.hasMoved = false;
+    }
+
+    Enemy.prototype.hasMoved = function() { return this.hasMoved; };
+    Enemy.prototype.setMoved = function(moved) { this.hasMoved = moved; };
+
+    Enemy.prototype.move = function (distance) {
+        this.eSprite.x += distance * this.speed;
+    }
+
+    Enemy.prototype.setCount = function(count) {
+        this.count = count;
+    }
+
+    Enemy.prototype.getCount = function () {
+        return this.count;
+    }
+
+    Enemy.prototype.checkExit = function (x, y) {
+        if (this.eSprite.x == x &&
+            this.eSprite.y == y) {
+            console.log("Exit!!");
         }
     }
-    
+
     return Enemy;
 });
+
 
