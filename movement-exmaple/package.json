@@ -1,0 +1,25 @@
+{
+  "name": "movement-example",
+  "version": "1.0.0",
+  "description": "Trying out different setups and implementations of the phaser library",
+  "main": "main.js",
+  "dependencies": {
+    "phaser-ce": "^2.8.0"
+  },
+  "devDependencies": {
+    "requirejs": "^2.3.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/courtneyglosser/hellophaser.git"
+  },
+  "author": "Courtney Glosser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/courtneyglosser/hellophaser/issues"
+  },
+  "homepage": "https://github.com/courtneyglosser/hellophaser#readme"
+}
