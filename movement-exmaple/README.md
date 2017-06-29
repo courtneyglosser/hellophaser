@@ -8,6 +8,7 @@ Movement Example
 - Move the sprite around - check
 - Display pertinent information
 - Check for collisions agains edge of world
+- Handle diagonal movement - check
 
 
 

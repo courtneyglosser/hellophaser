@@ -35,6 +35,7 @@ define(
     var map, layer;
     var speed = 4;
     var creep;
+    var autoCreep;
 
     function preload () {
 
@@ -68,10 +69,15 @@ define(
 
         creep = game.add.sprite(entranceX, entranceY, 'creep');
         creep.anchor.setTo(0, 0);
+
+        autoCreep = game.add.sprite(entranceX, entranceY, 'creep');
+        autoCreep.anchor.setTo(0, 0);
+        
     }
    
     function update() {
         checkUserInput();
+        moveCreep();
     }
 
     function render() {}
@@ -81,29 +87,29 @@ define(
         if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) ||
             game.input.keyboard.isDown(Phaser.Keyboard.A))
         {
-            console.log("Move left");
             creep.x -= speed;
         }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ||
+        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ||
             game.input.keyboard.isDown(Phaser.Keyboard.D))
         {
-            console.log("Move right");
             creep.x += speed;
         }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) ||
+        if (game.input.keyboard.isDown(Phaser.Keyboard.UP) ||
             game.input.keyboard.isDown(Phaser.Keyboard.W))
         {
-            console.log("Move up");
             creep.y -= speed;
         }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) ||
+        if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) ||
             game.input.keyboard.isDown(Phaser.Keyboard.S))
         {
-            console.log("Move down");
             creep.y += speed;
         }
         else
         {
         }
+    }
+
+    function moveCreep() {
+        autoCreep.x += speed;
     }
 });
