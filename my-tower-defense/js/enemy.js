@@ -6,7 +6,7 @@ define('enemy', function() {
         this.eSprite.checkWorldBounds = true;
         this.hasMoved = false;
         this.count = 0;
-        this.speed = 1;
+        this.speed = 2;
         
         // Now add methods
     }
@@ -33,9 +33,15 @@ define('enemy', function() {
 
     Enemy.prototype.checkExit = function (x, y) {
         if (this.eSprite.x == x &&
-            this.eSprite.y == y) {
-            console.log("Exit!!");
+            this.eSprite.y == y &&
+            this.eSprite.alive) {
+            return true;
         }
+        return false;
+    }
+
+    Enemy.prototype.destroy = function () {
+        this.eSprite.destroy();
     }
 
     return Enemy;

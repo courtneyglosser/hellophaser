@@ -34,10 +34,13 @@ define(
     var creeps = [];
     var numCreeps = 20;
     var countCreeps = 0; // How many have started their move?
+    var health = 10;
+    var enemyDisplay = "Enemies: " + (numCreeps - countCreeps);
+    var healthDisplay = "Health: " + health;
+    var enemyText, healthText;
 
     function preload () {
 
-        game.load.image('logo', '/phaser.png');
         game.load.image('entrance', 'assets/entrance-1.png');
         game.load.image('exit', 'assets/exit-1.png');
         
@@ -50,9 +53,6 @@ define(
     }
 
     function create () {
-
-        var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
 
         game.physics.startSystem(Phaser.Physics.ARCADE)
         map = game.add.tilemap('desert');
@@ -75,6 +75,11 @@ define(
             creeps.push(new Enemy(creepImage)); //enemy.create(creepImage));
         }
 
+        var style = {font: "15px Arial", fill: "#ff0044", align: "left"};
+        enemyText = game.add.text(50, 20, enemyDisplay, style);
+        enemyText.tint = "#000";
+        healthText = game.add.text(50, 40, healthDisplay, style);
+        healthText.tint = "#000";
     }
    
     function update() {
@@ -83,11 +88,18 @@ define(
             startTime = checkTime;
             checkTime = false;
             moveCreeps();
+            enemyDisplay = "Enemies: " + (numCreeps - countCreeps);
+            enemyText.text = enemyDisplay;
         }
 
         var exitX = game.world.width - tileWidth;
         var exitY = game.world.centerY;
         checkCreeps(exitX, exitY);
+
+        if (health <= 0) {
+            console.log("Game over");
+            game.destroy();
+        }
     }
     function render() {}
     
@@ -112,7 +124,13 @@ define(
 
     function checkCreeps(x, y) {
         for (var i=0; i < countCreeps; i++) {
-            creeps[i].checkExit(x, y);
+            if (creeps[i].checkExit(x, y) ){
+                creeps[i].destroy();
+                console.log("Creep Escaped!");
+                health--;
+                healthDisplay = "Health: " + health;
+                healthText.text = healthDisplay;
+            }
         }
     }
     
