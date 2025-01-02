@@ -9,7 +9,7 @@ Working with the Phaser game library for JavaScript / HTML 5 gaming.
 
 New year.  Fresh attempt.
 
-Run docker-compose up -d to kick off nginx server.
+Run `docker-compose up -d` to kick off nginx server.
 
 Visit http://localhost:8080/ to view 'Hello World' html.
 
