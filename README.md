@@ -4,18 +4,14 @@ Phaser - Hello World
 
 Working with the Phaser game library for JavaScript / HTML 5 gaming.
 
-Also, setting up an environment on my Linux VM, so I can resume coding in my
-local dev setup.  Much more comfortable.
+2025 - 01 - 02
+==============
 
-2017-06-29
-==========
+New year.  Fresh attempt.
 
-General cleanup. Moving some things around.  Building some basic example-type
-tools to help introduce myself.
+Run docker-compose up -d to kick off nginx server.
 
-- Pulling phaser-tower-defense example code up to root level
-- Creating a new directory to contain my-tower-defense code
-- Pulling README up to parent directory.
-- Creating new project directory for basic movement example tool.
+Visit http://localhost:8080/ to view 'Hello World' html.
 
+Visit directories from there to see various test projects.
 
