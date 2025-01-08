@@ -306,47 +306,9 @@ function findNeighbors(matchingTiles, checkTile, checkColor) {
 }
 
 
-//setInterval(draw, 10);
 draw()
 
 //document.addEventListener("keydown", keyDownHandler, false);
 //document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousedown", mouseDownHandler, false);
 
-//
-//ctx.beginPath();
-//ctx.rect(20, 40, 50, 50);
-//ctx.fillStyle = "#FF0000";
-//ctx.fill();
-//ctx.closePath();
-//
-//ctx.beginPath();
-//ctx.arc(240, 160, 20, 0, Math.PI*2, false);
-//ctx.fillStyle = "green";
-//ctx.fill();
-//ctx.closePath();
-//
-//ctx.beginPath();
-//ctx.rect(160, 10, 100, 40);
-//ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
-//ctx.stroke();
-//ctx.closePath();
-
-//function keyDownHandler(e) {
-//    if(e.keyCode == 39) {
-//        rightPressed = true;
-//    }
-//    else if(e.keyCode == 37) {
-//        leftPressed = true;
-//    }
-//}
-//
-//function keyUpHandler(e) {
-//    if(e.keyCode == 39) {
-//        rightPressed = false;
-//    }
-//    else if(e.keyCode == 37) {
-//        leftPressed = false;
-//    }
-//}
-//
