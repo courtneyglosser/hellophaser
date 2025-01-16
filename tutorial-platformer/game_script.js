@@ -81,13 +81,13 @@ function create ()
 //    const tiles = map.addTilesetImage('tileset');
 //    const layer = map.createLayer(0, tiles, 0, 0);
 //    const level_layer = level_map.createLayer(0, tiles, 160, 0);
-    map.createLayer('Background', tileset);
+    map.createLayer('Background', tileset).setScale(2);
 
-    map.createLayer('Water', tileset);
+    map.createLayer('Water', tileset).setScale(2);
 
-    map.createLayer('Platforms', tileset);
+    map.createLayer('Platforms', tileset).setScale(2);
 
-    map.createLayer('Decorations', tileset);
+    map.createLayer('Decorations', tileset).setScale(2);
 
     /*****
     //  A simple background for our game
