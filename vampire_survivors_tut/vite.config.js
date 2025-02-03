@@ -10,6 +10,14 @@ export default defineConfig({
                 manualChunks: undefined // Keeps everything in one JS file
             }
         }
-    }
+    },
+    server: {
+        watch: {
+            usePolling: true
+        },
+    },
+    esbuild: {
+        loader: "ts",
+    },
 });
 
