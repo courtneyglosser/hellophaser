@@ -6,6 +6,8 @@ export class PlayGame extends Phaser.Scene {
     controlKeys     : any;
     player!         : Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
     enemyGroup!     : Phaser.Physics.Arcade.Group;
+    scoreText!      : Phaser.GameObjects.Text;
+    score           : number = 0;
 
     constructor() {
         super ({
@@ -20,6 +22,8 @@ export class PlayGame extends Phaser.Scene {
             GameOptions.gameSize.height / 2,
             'player');
         this.enemyGroup = this.physics.add.group();
+        this.scoreText = this.add.text(16, 16, 'score: 0', {
+            fontSize: '32px', color: '#000'});
         const bulletGroup : Phaser.Physics.Arcade.Group = this.physics.add.group();
 
 
@@ -95,6 +99,8 @@ export class PlayGame extends Phaser.Scene {
                 bullet.body.checkCollision.none = true;
                 this.enemyGroup.killAndHide(enemy);
                 enemy.body.checkCollision.none = true;
+                this.score += 10;
+                this.scoreText.setText('Score: ' + this.score);
             });
 
         this.physics.add.collider(this.player, this.enemyGroup, () => {
