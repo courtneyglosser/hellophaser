@@ -10,7 +10,7 @@ export class PreloadAssets extends Phaser.Scene {
     }
 
     preload() : void {
-        this.load.image ('enemy', 'assets/sprites/Enemy.png');
+        this.load.image ('enemy', 'assets/sprites/Enemy-small.png');
         this.load.image ('player', 'assets/sprites/Player.png');
         this.load.image ('bullet', 'assets/sprites/Bullet.png');
     }
